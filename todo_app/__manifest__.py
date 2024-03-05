@@ -9,5 +9,8 @@
                ],
     'application': True,
     'data': [
+        'security/ir.model.access.csv',
+        'views/base_menus.xml',
+        'views/ticket.xml'
     ],
 }
