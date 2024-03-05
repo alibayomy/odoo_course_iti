@@ -21,4 +21,3 @@ class Ticket(models.Model):
     ])
     file = fields.Binary()
     description = fields.Text()
-
