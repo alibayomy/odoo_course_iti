@@ -6,12 +6,9 @@
             <tree>
                 <field name="f_name"/>
                 <field name="l_name"/>
-                <field name="birth_date"/>
-                <field name="image" widget="image" options='{"size":[100, 100]}'/>
+                <field name="history" invisible="age != 25"/>
                 <field name="address"/>
                 <field name="age"/>
-                <field name="history"/>
-                <field name="cr_ratio"/>
                 <field name="blood_type"/>
                 <field name="pcr"/>
                 <field name="department_id"/>
@@ -26,27 +23,51 @@
         <field name="model">hms.patient</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_add_log" type="object"
+                            string="Add Log History" class="btn btn-primary"/>
+                    <button name="action_good" type="object" string="Good"
+                            class="btn-success" invisible="state not in ('undetermined' , 'fair')"/>
+                    <button name="action_fair" type="object" string="Fair"
+                            class="btn-warning" invisible="state not in ('good','serious','undetermined')"/>
+                    <button name="action_serious" type="object" string="Serious"
+                            class="btn-danger" invisible="state not in ('undetermined', 'fair')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="undetermined,good,fair,serious"/>
+                </header>
                 <sheet>
                     <group>
                         <group string="General info.">
                             <field name="f_name"/>
                             <field name="l_name"/>
+                            <field name="email"/>
                             <field name="birth_date"/>
                             <field name="image" widget="image" options='{"size":[100, 100]}'/>
                             <field name="address"/>
                             <field name="age"/>
                         </group>
                         <group string="Medical History">
-                            <field name="history"/>
-                            <field name="cr_ratio"/>
-                            <field name="blood_type"/>
+                            <field name="history" invisible="age &lt; 50"/>
                             <field name="pcr"/>
-                            <field name="department_id"/>
-                            <field name="doctor_ids"/>
+                            <field name="cr_ratio" required="cr_ratio== 0.00"/>
+                            <field name="blood_type"/>
+                            <field name="department_id" domain="[('is_opened', '=', True)]"/>
+                            <field name="doctor_ids" widget="many2many_tags"
+                                   readonly="department_id == False"/>
                             <field name="state"/>
 
                         </group>
                     </group>
+                    <notebook>
+                        <page str="Log History">
+                            <field name="line_ids">
+                                <tree>
+                                    <field name="created_by"/>
+                                    <field name="date"/>
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

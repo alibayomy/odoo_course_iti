@@ -13,6 +13,7 @@
         'views/base_menus.xml',
         'views/patient.xml',
         'views/doctor.xml',
-        'views/department.xml'
+        'views/department.xml',
+        'wizard/add_log_wizard.xml',
     ],
 }
