@@ -58,7 +58,7 @@ class Patient(models.Model):
             if rec.age < 30:
                 rec.pcr = True
                 return {
-                    'warning': {'title':"hello",}
+                    'warning': {'title':"PCR checked",}
                 }
             else:
                 rec.pcr = False
