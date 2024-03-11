@@ -6,7 +6,7 @@
             <tree>
                 <field name="f_name"/>
                 <field name="l_name"/>
-                <field name="history" invisible="age != 25"/>
+                <field name="history"/>
                 <field name="address"/>
                 <field name="age"/>
                 <field name="blood_type"/>
